@@ -8,7 +8,9 @@ defmodule PhoenixTurbo.HandleTurboPlug do
 
   def call(conn, _opts) do
     if PhoenixTurbo.ControllerHelper.turbo_stream_request?(conn) do
-      put_layout(conn, false)
+      conn
+      |> put_root_layout(false)
+      |> put_layout(false)
     else
       conn
     end
