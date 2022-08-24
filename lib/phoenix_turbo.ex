@@ -30,9 +30,11 @@ defmodule PhoenixTurbo do
   """
   def router do
     quote do
-      defp handle_turbo_frame(conn, _opts) do
-        if length(get_req_header(conn, "turbo-frame")) > 0 do
-          put_layout(conn, false)
+      def handle_turbo_frame(conn, _opts) do
+        if PhoenixTurbo.ControllerHelper.turbo_stream_request?(conn) do
+          conn
+          |> Phoenix.Controller.put_root_layout(false)
+          |> Phoenix.Controller.put_layout(false)
         else
           conn
         end
