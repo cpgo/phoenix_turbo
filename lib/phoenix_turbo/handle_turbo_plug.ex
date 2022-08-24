@@ -1,6 +1,6 @@
 defmodule PhoenixTurbo.HandleTurboPlug do
   import Plug.Conn
-
+  use Phoenix.Controller
   def init(options) do
     # initialize options
     options
